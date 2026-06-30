@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit & Kế Hoạch Triển Khai 3 Tháng — Nội thất Phước Thịnh × D STUDIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:  #0B1D3A;
+    --blue:  #2B6BFF;
+    --lime:  #A6FF00;
+    --white: #FFFFFF;
+    --bg:    #F4F7FB;
+    --lb:    #EBF2FF;
+    --gray:  #64748B;
+    --border:#E2E8F0;
+  }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--navy); font-size:15px; line-height:1.7; }
+
+  /* COVER */
+  .cover { background:var(--navy); min-height:100vh; display:flex; flex-direction:column; justify-content:space-between; padding:56px 64px; }
+  .cover-logo img { height:44px; }
+  .cover-body { flex:1; display:flex; flex-direction:column; justify-content:center; padding:80px 0 40px; }
+  .cover-tag { display:inline-block; background:rgba(166,255,0,.12); color:var(--lime); border:1px solid rgba(166,255,0,.3); border-radius:40px; font-size:12px; font-weight:600; letter-spacing:.1em; padding:6px 16px; text-transform:uppercase; margin-bottom:32px; width:fit-content; }
+  .cover-title { font-family:'Space Grotesk',sans-serif; font-size:52px; font-weight:700; color:#fff; line-height:1.15; margin-bottom:16px; }
+  .cover-title span { color:var(--lime); }
+  .cover-sub { font-size:18px; color:rgba(255,255,255,.55); max-width:560px; margin-bottom:48px; }
+  .cover-meta { display:flex; gap:40px; }
+  .cover-meta-item label { font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.35); display:block; margin-bottom:4px; }
+  .cover-meta-item span { font-size:14px; font-weight:500; color:rgba(255,255,255,.85); }
+  .cover-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,.1); padding-top:24px; }
+  .cover-footer-tag { font-size:13px; color:rgba(255,255,255,.3); font-style:italic; }
+  .cover-footer-ct { font-size:13px; color:rgba(255,255,255,.35); }
+
+  /* LAYOUT */
+  .sw { background:var(--white); padding:64px 48px; }
+  .sb { background:var(--bg); padding:64px 48px; }
+  .sn { background:var(--navy); padding:64px 48px; }
+  .page { max-width:1000px; margin:0 auto; }
+
+  .sh { margin-bottom:40px; }
+  .sn-label { font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+  .sn-label.lt { color:rgba(166,255,0,.7); }
+  .s-title { font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; color:var(--navy); line-height:1.2; }
+  .s-title.lt { color:#fff; }
+  .s-desc { margin-top:12px; color:var(--gray); max-width:640px; font-size:15px; }
+  .s-desc.lt { color:rgba(255,255,255,.65); }
+
+  /* SCORE SUMMARY */
+  .score-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:0; }
+  .sc { background:var(--bg); border:1px solid var(--border); border-radius:14px; padding:20px 16px; text-align:center; }
+  .sc-val { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1; margin-bottom:6px; }
+  .sc-label { font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:.06em; }
+  .v-navy { color:var(--navy); } .v-blue { color:var(--blue); } .v-dim { color:var(--gray); }
+
+  /* INSIGHT BLOCKS */
+  .insight-block { margin-bottom:48px; }
+  .ib-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+  .ib-icon { width:40px; height:40px; border-radius:10px; background:var(--lb); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .ib-title { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:600; }
+  .ib-sub { font-size:13px; color:var(--gray); margin-top:2px; }
+
+  /* FINDING CARDS */
+  .find-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .find-card { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:22px 24px; }
+  .find-card.full { grid-column:1/-1; }
+  .fc-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; padding:3px 10px; border-radius:4px; display:inline-block; }
+  .fcl-navy { background:var(--navy); color:var(--lime); }
+  .fcl-blue { background:var(--lb); color:var(--blue); border:1px solid #C7DCFF; }
+  .fc-title { font-weight:600; font-size:14px; margin-bottom:8px; color:var(--navy); }
+  .fc-body { font-size:13px; color:var(--gray); line-height:1.7; }
+  .fc-body strong { color:var(--navy); font-weight:600; }
+
+  /* COMPARISON TABLE */
+  .comp-table { width:100%; border-collapse:collapse; background:var(--white); border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+  .comp-table thead tr { background:var(--navy); }
+  .comp-table thead th { padding:13px 18px; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.55); text-align:left; }
+  .comp-table tbody tr { border-bottom:1px solid var(--border); }
+  .comp-table tbody tr:last-child { border-bottom:none; }
+  .comp-table tbody tr:hover { background:var(--bg); }
+  .comp-table tbody td { padding:14px 18px; font-size:13px; vertical-align:middle; }
+  .comp-name { font-weight:600; font-size:14px; color:var(--navy); }
+  .comp-sub { font-size:12px; color:var(--gray); margin-top:2px; }
+  .comp-tag { display:inline-block; font-size:11px; font-weight:600; padding:3px 9px; border-radius:4px; }
+  .ct-pt { background:var(--lb); color:var(--blue); border:1px solid #C7DCFF; }
+  .ct-mid { background:#F5F5F5; color:var(--gray); border:1px solid var(--border); }
+  .ct-win { background:rgba(166,255,0,.15); color:#3A6600; border:1px solid rgba(166,255,0,.4); }
+
+  .dot-row { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray); margin-bottom:6px; }
+  .dot-row:last-child { margin-bottom:0; }
+  .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .d-navy { background:var(--navy); } .d-blue { background:var(--blue); }
+
+  /* SEO TABLE */
+  .seo-table { width:100%; border-collapse:collapse; }
+  .seo-table tr { border-bottom:1px solid var(--border); }
+  .seo-table tr:last-child { border-bottom:none; }
+  .seo-table td { padding:13px 0; font-size:13px; vertical-align:top; }
+  .seo-table td:first-child { width:200px; color:var(--gray); font-weight:500; padding-right:24px; }
+  .seo-val { color:var(--navy); }
+  .seo-bad { color:#0B1D3A; opacity:.45; font-style:italic; }
+  .seo-good { color:var(--blue); }
+
+  /* CONTENT ANALYSIS */
+  .content-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .cs-block { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:22px; }
+  .cs-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .cs-icon { width:36px; height:36px; border-radius:8px; background:var(--bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .cs-title { font-weight:600; font-size:14px; }
+  .cs-handle { font-size:12px; color:var(--gray); }
+
+  /* WHAT-WE-NEED */
+  .need-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .need-card { background:rgba(166,255,0,.06); border:1px solid rgba(166,255,0,.25); border-radius:14px; padding:22px; }
+  .need-num { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:var(--lime); margin-bottom:8px; }
+  .need-title { font-size:14px; font-weight:600; color:#fff; margin-bottom:6px; }
+  .need-body { font-size:12px; color:rgba(255,255,255,.65); line-height:1.65; }
+
+  /* FOOTER */
+  .doc-footer { background:var(--navy); padding:40px 48px; display:flex; align-items:center; justify-content:space-between; }
+  .doc-footer img { height:30px; opacity:.75; }
+  .doc-footer-text { font-size:12px; color:rgba(255,255,255,.35); text-align:right; line-height:1.7; }
+  .doc-footer-text strong { color:rgba(255,255,255,.6); }
+
+  /* PHASE BADGE */
+  .phase-badge { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:var(--lime); font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:6px 16px; border-radius:30px; margin-bottom:16px; }
+
+  /* MECHANISM BOX (Ads-to-Organic engine) */
+  .mech-box { background:var(--navy); border-radius:20px; padding:40px 44px; margin-bottom:0; }
+  .mech-flow { display:grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap:16px; align-items:center; margin-top:28px; }
+  .mech-step { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:20px; }
+  .mech-step-num { font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; color:var(--lime); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
+  .mech-step-title { font-size:14px; font-weight:600; color:#fff; margin-bottom:6px; }
+  .mech-step-body { font-size:12.5px; color:rgba(255,255,255,.6); line-height:1.6; }
+  .mech-arrow { color:rgba(166,255,0,.5); font-size:20px; text-align:center; }
+  .mech-metrics { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .mech-metric-tag { font-size:10.5px; background:rgba(43,107,255,.15); color:#7FA8FF; border:1px solid rgba(43,107,255,.3); padding:2px 8px; border-radius:4px; }
+
+  /* WEEK CARD */
+  .week-card { background:var(--white); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; overflow:hidden; }
+  .week-head { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; background:var(--bg); border-bottom:1px solid var(--border); flex-wrap:wrap; gap:10px; }
+  .week-num { display:flex; align-items:center; gap:12px; }
+  .week-num-badge { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:var(--navy); background:var(--white); border:1px solid var(--border); width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .week-title { font-size:15px; font-weight:600; color:var(--navy); }
+  .week-sub { font-size:12px; color:var(--gray); margin-top:2px; }
+  .week-milestone { font-size:11px; font-weight:600; background:var(--lb); color:var(--blue); padding:4px 12px; border-radius:20px; border:1px solid #C7DCFF; white-space:nowrap; }
+
+  .week-body { padding:22px 24px; }
+  .task-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .task-item { display:flex; gap:12px; align-items:flex-start; padding:14px 16px; background:var(--bg); border-radius:10px; }
+  .task-role { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:3px 8px; border-radius:4px; flex-shrink:0; white-space:nowrap; height:fit-content; }
+  .role-content { background:rgba(43,107,255,.12); color:var(--blue); }
+  .role-design { background:rgba(166,255,0,.15); color:#3A6600; }
+  .role-ads { background:var(--navy); color:var(--lime); }
+  .role-pt { background:#FFF1E0; color:#B45F06; }
+  .role-all { background:#F0E8FF; color:#6B3FA0; }
+  .task-text { font-size:13px; color:var(--navy); line-height:1.5; }
+  .task-text strong { font-weight:600; }
+
+  /* DELIVERABLE STRIP */
+  .deliv-strip { margin-top:16px; padding-top:16px; border-top:1px dashed var(--border); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .deliv-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--gray); margin-right:4px; }
+  .deliv-tag { font-size:12px; background:var(--white); border:1px solid var(--border); color:var(--navy); padding:4px 11px; border-radius:20px; }
+
+  /* MONTH SUMMARY CARD */
+  .month-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:40px; }
+  .ms-card { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .ms-label { font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+  .ms-val { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--navy); line-height:1.3; }
+
+  /* KPI TABLE */
+  .kpi-table { width:100%; border-collapse:collapse; background:var(--white); border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+  .kpi-table thead tr { background:var(--navy); }
+  .kpi-table thead th { padding:13px 18px; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.55); text-align:left; }
+  .kpi-table tbody tr { border-bottom:1px solid var(--border); }
+  .kpi-table tbody tr:last-child { border-bottom:none; }
+  .kpi-table tbody td { padding:14px 18px; font-size:13px; vertical-align:top; }
+  .kpi-table tbody tr:hover { background:var(--bg); }
+
+  /* BUDGET SPLIT */
+  .budget-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .budget-card { border-radius:16px; padding:26px; border:1px solid var(--border); background:var(--white); }
+  .budget-card.accent { background:var(--navy); border:none; }
+  .budget-pct { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:var(--blue); margin-bottom:6px; }
+  .budget-card.accent .budget-pct { color:var(--lime); }
+  .budget-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:10px; }
+  .budget-card.accent .budget-title { color:#fff; }
+  .budget-body { font-size:13px; color:var(--gray); line-height:1.65; }
+  .budget-card.accent .budget-body { color:rgba(255,255,255,.65); }
+
+  /* TEST BRIEF CARD (chi tiết từng content angle trong đợt test) */
+  .test-brief-intro { font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:18px; max-width:760px; }
+  .test-angle-card { background:var(--white); border:1px solid var(--border); border-radius:14px; margin-bottom:14px; overflow:hidden; }
+  .ta-head { display:flex; align-items:center; gap:12px; padding:14px 20px; background:var(--bg); border-bottom:1px solid var(--border); }
+  .ta-num { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:#fff; background:var(--navy); width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .ta-name { font-size:14px; font-weight:600; color:var(--navy); }
+  .ta-format { margin-left:auto; font-size:11px; font-weight:600; background:var(--lb); color:var(--blue); padding:3px 10px; border-radius:20px; border:1px solid #C7DCFF; white-space:nowrap; }
+  .ta-body { padding:18px 20px; }
+  .ta-row { display:grid; grid-template-columns:110px 1fr; gap:14px; padding:8px 0; border-bottom:1px dashed var(--border); font-size:13px; }
+  .ta-row:last-child { border-bottom:none; }
+  .ta-row-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--gray); padding-top:1px; }
+  .ta-row-val { color:var(--navy); line-height:1.6; }
+  .ta-row-val strong { font-weight:600; }
+  .ta-row-val em { font-style:normal; color:var(--blue); font-weight:500; }
+
+  /* TEST SUMMARY BAR */
+  .test-summary-bar { display:flex; gap:14px; flex-wrap:wrap; background:var(--navy); border-radius:14px; padding:18px 22px; margin-bottom:20px; }
+
+  /* NOTE BOX */
+  .note-box { background:var(--lb); border:1px solid #C7DCFF; border-radius:14px; padding:18px 22px; display:flex; gap:14px; align-items:flex-start; margin-top:20px; }
+  .note-icon { width:28px; height:28px; border-radius:50%; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+  .note-text { font-size:13px; color:var(--navy); line-height:1.65; }
+  .note-text strong { font-weight:600; }
+
+  /* DIVIDER */
+  .divider { border:none; border-top:1px solid var(--border); }
+  .tsb-item { flex:1; min-width:140px; }
+  .tsb-label { font-size:10.5px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .tsb-val { font-size:13.5px; color:#fff; font-weight:600; }
+  .tsb-val.lime { color:var(--lime); }
+
+  /* TOC */
+  .toc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:8px; }
+  .toc-item { display:flex; align-items:center; gap:14px; background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; }
+  .toc-num { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:var(--blue); width:32px; flex-shrink:0; }
+  .toc-text-title { font-size:13.5px; font-weight:600; color:var(--navy); }
+  .toc-text-sub { font-size:11.5px; color:var(--gray); margin-top:1px; }
+  .toc-divider-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--blue); margin:24px 0 10px; }
+
+  /* BRIDGE SECTION */
+  .bridge { background: linear-gradient(180deg, var(--navy) 0%, #0d2347 100%); padding:72px 48px; text-align:center; }
+  .bridge-icon { width:56px; height:56px; border-radius:50%; background:rgba(166,255,0,.12); border:1px solid rgba(166,255,0,.3); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; }
+  .bridge-title { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:#fff; max-width:700px; margin:0 auto 16px; line-height:1.3; }
+  .bridge-title span { color:var(--lime); }
+  .bridge-desc { font-size:15px; color:rgba(255,255,255,.6); max-width:600px; margin:0 auto; line-height:1.75; }
+  .bridge-arrow-down { margin-top:32px; font-size:24px; color:rgba(166,255,0,.6); }
+
+  /* ═══════════════ MOBILE OPTIMIZATION ═══════════════ */
+  @media(max-width:768px){
+    body { font-size:14px; }
+
+    /* Cover */
+    .cover { padding:32px 20px; min-height:auto; }
+    .cover-logo img { height:32px; }
+    .cover-title { font-size:30px; }
+    .cover-sub { font-size:15px; }
+    .cover-meta { gap:20px; }
+    .cover-footer { flex-direction:column; gap:10px; align-items:flex-start; }
+
+    /* Section padding */
+    .sw,.sb,.sn { padding:36px 18px; }
+    .page { max-width:100%; }
+    .s-title { font-size:24px; }
+    .sh { margin-bottom:28px; }
+
+    /* Audit grids */
+    .score-grid { grid-template-columns:repeat(2,1fr); }
+    .find-grid,.content-split,.need-grid,.opp-grid { grid-template-columns:1fr; }
+    .find-card.full { grid-column:auto; }
+
+    /* TOC */
+    .toc-grid { grid-template-columns:1fr; }
+
+    /* Bridge */
+    .bridge { padding:48px 20px; }
+    .bridge-title { font-size:22px; }
+    .bridge-desc { font-size:14px; }
+
+    /* Mechanism box */
+    .mech-box { padding:24px 20px; }
+    .mech-flow { grid-template-columns:1fr; gap:12px; }
+    .mech-arrow { transform:rotate(90deg); padding:2px 0; }
+    .phase-badge { font-size:11px; padding:5px 12px; }
+
+    /* Month summary cards */
+    .month-summary { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .ms-val { font-size:16px; }
+
+    /* Week cards & task grid */
+    .week-head { padding:14px 16px; }
+    .week-body { padding:16px; }
+    .task-grid { grid-template-columns:1fr; gap:10px; }
+    .week-milestone { font-size:10px; padding:3px 10px; }
+
+    /* Test angle cards */
+    .ta-head { flex-wrap:wrap; padding:12px 16px; }
+    .ta-format { margin-left:0; }
+    .ta-body { padding:14px 16px; }
+    .ta-row { grid-template-columns:1fr; gap:4px; }
+    .ta-row-label { padding-top:0; }
+
+    .test-summary-bar { padding:14px 16px; gap:10px; }
+    .tsb-item { min-width:45%; }
+
+    /* Budget split */
+    .budget-split { grid-template-columns:1fr; }
+
+    /* Tables: allow horizontal scroll instead of squashing */
+    .comp-table, .kpi-table, .seo-table, .priority-table {
+      display:block;
+      overflow-x:auto;
+      white-space:nowrap;
+      -webkit-overflow-scrolling:touch;
+    }
+    .comp-table thead, .kpi-table thead, .priority-table thead { display:table-header-group; }
+    .comp-table tbody, .kpi-table tbody, .priority-table tbody { display:table-row-group; }
+    .comp-table tr, .kpi-table tr, .priority-table tr { display:table-row; }
+    .comp-table td, .comp-table th, .kpi-table td, .kpi-table th, .priority-table td, .priority-table th {
+      white-space:normal;
+      min-width:140px;
+    }
+    .seo-table td:first-child { width:auto; min-width:110px; }
+
+    /* Note box */
+    .note-box { padding:14px 16px; flex-direction:row; }
+    .note-text { font-size:12.5px; }
+
+    /* Doc footer */
+    .doc-footer { flex-direction:column; gap:16px; padding:32px 20px; align-items:flex-start; }
+    .doc-footer img { height:24px; }
+    .doc-footer-text { text-align:left; }
+  }
+
+  @media(max-width:480px){
+    .cover-title { font-size:25px; }
+    .cover-meta { flex-direction:column; gap:12px; }
+    .s-title { font-size:21px; }
+    .score-grid { grid-template-columns:1fr 1fr; gap:10px; }
+    .stat-card .stat-val, .sc-val, .ms-val { font-size:18px; }
+    .month-summary { grid-template-columns:1fr; }
+    .tsb-item { min-width:100%; }
+    .mech-step { padding:16px; }
+    .bridge-title { font-size:19px; }
+    .budget-pct { font-size:28px; }
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-logo"><img src="data:image/png;base64,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" alt="D STUDIO"></div>
+  <div class="cover-body">
+    <div class="cover-tag">Tài liệu chiến lược · D STUDIO × Nội thất Phước Thịnh</div>
+    <h1 class="cover-title">Audit & Kế hoạch<br>triển khai <span>3 tháng</span></h1>
+    <p class="cover-sub">Đánh giá toàn diện hệ thống digital hiện tại, và lộ trình triển khai chi tiết theo tuần — xây dựng từ chính những phát hiện trong audit, không phải một kế hoạch mẫu áp dụng chung.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><label>Khách hàng</label><span>Nội thất Phước Thịnh</span></div>
+      <div class="cover-meta-item"><label>Ngày lập</label><span>30/06/2026</span></div>
+      <div class="cover-meta-item"><label>Phạm vi</label><span>Audit + Triển khai Tháng 1–3</span></div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span class="cover-footer-tag">Design Better. Grow Faster.</span>
+    <span class="cover-footer-ct">dstudioagency.contact@gmail.com · 0879.576.669</span>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">Mục lục</div>
+      <h2 class="s-title">Hai phần — một mạch logic liền nhau</h2>
+      <p class="s-desc">Phần đầu trả lời câu hỏi <strong>"đang đứng ở đâu"</strong>. Phần sau trả lời <strong>"sẽ đi như thế nào"</strong> — và mỗi quyết định trong kế hoạch đều bắt nguồn trực tiếp từ một phát hiện cụ thể ở phần audit.</p>
+    </div>
+
+    <p class="toc-divider-label">Phần I — Audit chuyên sâu</p>
+    <div class="toc-grid">
+      <div class="toc-item"><div class="toc-num">01</div><div><div class="toc-text-title">Tổng quan</div><div class="toc-text-sub">Scorecard nền tảng digital</div></div></div>
+      <div class="toc-item"><div class="toc-num">02</div><div><div class="toc-text-title">Content & Tone</div><div class="toc-text-sub">Phân tích từng kênh hiện tại</div></div></div>
+      <div class="toc-item"><div class="toc-num">03</div><div><div class="toc-text-title">SEO & Discoverability</div><div class="toc-text-sub">Khả năng được tìm thấy trên Google</div></div></div>
+      <div class="toc-item"><div class="toc-num">04</div><div><div class="toc-text-title">Competitive Landscape</div><div class="toc-text-sub">Long Khánh & toàn Đồng Nai</div></div></div>
+      <div class="toc-item"><div class="toc-num">05</div><div><div class="toc-text-title">Bước tiếp theo</div><div class="toc-text-sub">Hoàn thiện trong Discovery Meeting</div></div></div>
+    </div>
+
+    <p class="toc-divider-label">Phần II — Kế hoạch triển khai 3 tháng</p>
+    <div class="toc-grid">
+      <div class="toc-item"><div class="toc-num">00</div><div><div class="toc-text-title">Cơ chế vận hành</div><div class="toc-text-sub">Test trên Ads, nhân rộng Organic</div></div></div>
+      <div class="toc-item"><div class="toc-num">—</div><div><div class="toc-text-title">3 tháng có lâu không?</div><div class="toc-text-sub">Phân tích timing trước khi mở rộng</div></div></div>
+      <div class="toc-item"><div class="toc-num">T1</div><div><div class="toc-text-title">Tháng 1 — Nền tảng</div><div class="toc-text-sub">Tuần 1–4: Nền tảng rút gọn + Test #1 chi tiết</div></div></div>
+      <div class="toc-item"><div class="toc-num">T2</div><div><div class="toc-text-title">Tháng 2 — Kích hoạt</div><div class="toc-text-sub">Tuần 5–8: Scale content & Test #2-3</div></div></div>
+      <div class="toc-item"><div class="toc-num">T3</div><div><div class="toc-text-title">Tháng 3 — Tối ưu</div><div class="toc-text-sub">Tuần 9–12: Retargeting & A/B test sâu</div></div></div>
+    </div>
+  </div>
+</div>
+<!-- 01 SUMMARY SCORES -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">01 — Điểm tổng hợp</div>
+      <h2 class="s-title">Scorecard nền tảng digital</h2>
+      <p class="s-desc">Đánh giá tổng thể trên 5 chiều — mỗi chiều được chấm dựa trên dữ liệu thu thập được từ các nguồn công khai tại thời điểm 30/06/2026.</p>
+    </div>
+    <div class="score-grid">
+      <div class="sc"><div class="sc-val v-dim">1.5<span style="font-size:16px">/10</span></div><div class="sc-label">Content & Tone</div></div>
+      <div class="sc"><div class="sc-val v-dim">2<span style="font-size:16px">/10</span></div><div class="sc-label">Brand Consistency</div></div>
+      <div class="sc"><div class="sc-val v-dim">2<span style="font-size:16px">/10</span></div><div class="sc-label">SEO & Discoverability</div></div>
+      <div class="sc"><div class="sc-val v-blue">7<span style="font-size:16px">/10</span></div><div class="sc-label">Năng lực sản phẩm</div></div>
+      <div class="sc"><div class="sc-val v-dim">0<span style="font-size:16px">/10</span></div><div class="sc-label">Hạ tầng ads</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 CONTENT ANALYSIS -->
+<div class="sb">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">02 — Content & Tone</div>
+      <h2 class="s-title">Phân tích nội dung hiện tại</h2>
+      <p class="s-desc">Đánh giá cách Phước Thịnh đang nói — và khoảng cách so với cách một thương hiệu cao cấp nên nói.</p>
+    </div>
+
+    <div class="insight-block">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="#1877F2"/></svg></div>
+        <div>
+          <div class="ib-title">Facebook Fanpage — Gần như im lặng</div>
+          <div class="ib-sub">Đăng lẻ tẻ, không có kế hoạch, không có tone nhất quán</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề cốt lõi</div>
+          <div class="fc-title">Mô tả trang sai định vị từ dòng đầu tiên</div>
+          <div class="fc-body">Dòng bio hiện tại: <strong>"chuyên sản xuất, thiết kế - thi công nội thất gỗ công nghiệp và gỗ tự nhiên"</strong>. Đặt gỗ công nghiệp lên trước, ngang hàng với gỗ tự nhiên — ngay lập tức triệt tiêu định vị cao cấp. Khách hàng tệp premium đọc dòng này sẽ không dừng lại.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề cốt lõi</div>
+          <div class="fc-title">94 likes sau thời gian dài hoạt động — tín hiệu page bị bỏ bê</div>
+          <div class="fc-body">Chỉ có 1 người đang nói về trang. Với thuật toán Facebook, trang không có engagement sẽ bị giảm reach tự nhiên xuống gần 0. Mọi bài đăng mới sẽ chỉ tiếp cận một phần rất nhỏ trong số 94 likes đó — chứ chưa nói đến khách hàng mới.</div>
+        </div>
+        <div class="find-card full">
+          <div class="fc-label fcl-blue">Phân tích content pattern</div>
+          <div class="fc-title">Đăng lẻ tẻ không có kế hoạch — thiếu cả 3 yếu tố cơ bản</div>
+          <div class="fc-body">Qua quan sát, các bài đăng của Phước Thịnh trên Facebook thiếu đồng thời ba yếu tố: <strong>(1) Visual identity</strong> — không có template nhất quán, mỗi bài một kiểu ảnh; <strong>(2) Storytelling</strong> — không có câu chuyện về gỗ, về thợ thủ công, về quy trình — toàn bộ nội dung đang dừng ở mức "đăng ảnh sản phẩm"; <strong>(3) CTA rõ ràng</strong> — không có lời kêu gọi dẫn khách đến showroom. Kết quả: bài đăng không tạo ra được bất kỳ hành động có ý nghĩa nào từ người xem.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2B6BFF" stroke-width="1.8"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#2B6BFF" stroke-width="1.8"/></svg></div>
+        <div>
+          <div class="ib-title">Website bán lẻ — Catalog tốt, nhưng không có giọng nói</div>
+          <div class="ib-sub">noithatphuocthinh.vn — cấu trúc ổn, content thiếu hồn</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề định vị</div>
+          <div class="fc-title">Menu song song gỗ tự nhiên và gỗ công nghiệp — tự triệt tiêu premium positioning</div>
+          <div class="fc-body">Navigation bar đặt "Nội thất Gỗ Tự Nhiên" và "Nội thất Gỗ Công Nghiệp" ngang hàng nhau. Khách hàng cao cấp đến tìm nội thất gỗ thật sẽ ngay lập tức thấy sự lẫn lộn này và nghi ngờ về mức độ chuyên sâu của thương hiệu. Đây là điểm chốt của toàn bộ vấn đề định vị online.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề content</div>
+          <div class="fc-title">50+ sản phẩm nhưng hầu hết chỉ có tên — không có câu chuyện, không có thông số kỹ thuật</div>
+          <div class="fc-body">Sản phẩm như "Bộ Sofa Gỗ Gõ Đỏ TN01" chỉ có tên và giá "Liên hệ". Không có: loại gỗ cụ thể (nguồn gốc, độ tuổi cây), kích thước, quy trình xử lý bề mặt, thời gian sản xuất, hay câu chuyện về sản phẩm đó. Khách hàng cao cấp cần những thông tin này để ra quyết định ghé showroom.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-blue">Điểm tích cực</div>
+          <div class="fc-title">Quy trình 5 bước và danh sách đối tác — nội dung xây dựng tin tưởng tốt</div>
+          <div class="fc-body">Website đã có: quy trình làm việc 5 bước rõ ràng, logo đối tác uy tín (Blum, Hafele, Hettich, Malloca, An Cường, Teka). Đây là nội dung xây dựng trust tốt. Vấn đề là nó đang nằm ở vị trí quá thấp trên trang, và chưa được nhấn mạnh đúng mức.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề kỹ thuật</div>
+          <div class="fc-title">Toàn bộ ảnh sản phẩm đang lỗi — catalog 50+ sản phẩm hoàn toàn vô hiệu</div>
+          <div class="fc-body">Đây là vấn đề nghiêm trọng nhất về mặt kỹ thuật. Khách search Google vào website thấy sản phẩm không có ảnh — bounce rate sẽ gần 100%. Cần xác định nguyên nhân (broken CDN, hosting lỗi, hay lỗi code) và fix trong 24-48 giờ đầu của hợp tác.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z" fill="#010101"/></svg></div>
+        <div>
+          <div class="ib-title">TikTok @noithatphuocthinhlk — Kênh tiềm năng nhất, đang trong "view jail"</div>
+          <div class="ib-sub">Chưa có video nào vượt khỏi vòng followers hiện có</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card full" style="border-left:3px solid var(--navy); border-radius:0 14px 14px 0;">
+          <div class="fc-label fcl-navy">Nhận định</div>
+          <div class="fc-title">Kênh đang ở trạng thái "view jail" — nội dung chỉ tiếp cận followers hiện có, chưa breakthrough ra audience mới</div>
+          <div class="fc-body">Đây là trạng thái phổ biến với các kênh TikTok mới hoặc chưa có content strategy rõ ràng: video không đạt đủ tín hiệu engagement để thuật toán đẩy ra "For You Page" rộng hơn. Với nội thất gỗ cao cấp, đây thực ra là cơ hội lớn — bởi vì ngành này có sẵn loại content mà TikTok ưu tiên phân phối: hình ảnh chân thực, quy trình thủ công, behind-the-scenes. Vấn đề không nằm ở nền tảng, mà ở việc chưa có content angle đúng được thử nghiệm.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Cần làm rõ về thương hiệu</div>
+          <div class="fc-title">Handle @noithatphuocthinh<strong>lk</strong> — nên xác nhận ai đang giữ tên gốc</div>
+          <div class="fc-body">Đuôi "lk" (Long Khánh) cho thấy tên thương hiệu chính có thể đã được người khác đăng ký trước trên TikTok. Đây là việc cần làm rõ sớm: nếu @noithatphuocthinh đang bị một bên thứ 3 nắm giữ hoặc bỏ trống, D STUDIO sẽ hỗ trợ xử lý ngay trong tuần 1 để bảo vệ thương hiệu trên nền tảng này.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Hướng triển khai</div>
+          <div class="fc-title">Bắt đầu lại từ đầu với content angle đã được kiểm chứng trong ngành — không cần dò tìm từ con số 0</div>
+          <div class="fc-body">Vì kênh chưa có video nào đạt tín hiệu tốt để tham khảo, D STUDIO sẽ không mất thời gian thử-sai trên kênh cũ. Thay vào đó, áp dụng ngay công thức đã được chứng minh hiệu quả với cùng phân khúc sản phẩm (xem benchmark bên dưới): behind-the-scenes xưởng gỗ, câu chuyện thợ thủ công, quy trình chế tác — và đo lường, tối ưu theo dữ liệu thực tế từ tháng đầu tiên.</div>
+        </div>
+        <div class="find-card full" style="background:rgba(166,255,0,.05); border-color:rgba(166,255,0,.3);">
+          <div class="fc-label fcl-navy">Benchmark từ ngành — cùng phân khúc, cùng loại sản phẩm</div>
+          <div class="fc-title">Nội thất Tuấn Phát: gỗ óc chó + TikTok = hàng chục nghìn views từ video đời thường</div>
+          <div class="fc-body">Case study ghi nhận trên BrandsVietnam (9/2025): Nội thất Tuấn Phát — chuyên gỗ tự nhiên cao cấp tại TP.HCM — xây kênh TikTok bằng video behind-the-scenes xưởng gỗ và câu chuyện người thợ. Kết quả: <strong>hàng chục nghìn lượt xem, hàng trăm bình luận chỉ sau vài ngày đăng</strong>, không cần thiết bị quay đắt tiền hay đội sản xuất. Công thức: con người thật + chuyên môn thật + gỗ thật. Đây chính xác là những gì Phước Thịnh đang có — nhà máy 5.000m², thợ thủ công lành nghề, gỗ nguyên khối nguồn gốc rõ ràng — và là hướng đi D STUDIO sẽ áp dụng ngay từ tháng đầu tiên.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-block" style="margin-bottom:0;">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" fill="#FF0000"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></div>
+        <div>
+          <div class="ib-title">YouTube — Thương hiệu hiện đang chạy 2 kênh song song, cần gộp về một</div>
+          <div class="ib-sub">@gophuocthinh và @noithatphuocthinh đang phân tán cùng một audience</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card full" style="border-left:3px solid var(--navy); border-radius:0 14px 14px 0;">
+          <div class="fc-label fcl-navy">Nhận định</div>
+          <div class="fc-title">Hai kênh đang phân tán authority — cần hợp nhất về một kênh chính</div>
+          <div class="fc-body">YouTube ưu tiên phân phối cho kênh có tín hiệu nhất quán, tích lũy theo thời gian. Khi thương hiệu vận hành 2 kênh song song, mỗi kênh chỉ nhận một phần tín hiệu, khiến cả hai khó đạt đến ngưỡng được đề xuất rộng rãi. Tin tốt: <strong>@noithatphuocthinh đã có nền tảng đúng để chọn làm trục chính</strong> — mô tả kênh bài bản, đề cập rõ nhà máy 5.000m² và 22 năm kinh nghiệm, handle khớp với tên thương hiệu và domain website.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Quyết định cần thống nhất</div>
+          <div class="fc-title">Archive hay merge @gophuocthinh — quyết định trong Discovery Meeting</div>
+          <div class="fc-body">Với quyền truy cập YouTube Studio trong buổi đầu làm việc, D STUDIO sẽ xem nhanh subscriber và video nào từng có tương tác tốt ở kênh cũ — để quyết định giữ lại nội dung nào (re-upload sang kênh chính) và archive phần còn lại một cách có chiến lược, không mất đi giá trị đã tích lũy.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-blue">Hướng phát triển</div>
+          <div class="fc-title">Xây dựng series nội dung nhất quán thay vì đăng bột phát</div>
+          <div class="fc-body">Cả hai kênh hiện thiếu series định kỳ và thumbnail nhận diện thương hiệu. Đây là điều D STUDIO sẽ thiết lập ngay khi vào triển khai trên kênh chính duy nhất: format cố định, lịch đăng nhất quán, và mỗi video gắn với một câu chuyện cụ thể về gỗ, về quy trình, hoặc về dự án đã hoàn thành.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 SEO & DISCOVERABILITY -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">03 — SEO & Discoverability</div>
+      <h2 class="s-title">Khả năng được tìm thấy trên Google</h2>
+      <p class="s-desc">Khi khách hàng tại Long Khánh tìm "nội thất gỗ tự nhiên" hay "showroom nội thất đẹp Long Khánh" — Phước Thịnh có xuất hiện không?</p>
+    </div>
+
+    <div class="insight-block">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#34A853" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="#34A853" stroke-width="1.8"/></svg></div>
+        <div>
+          <div class="ib-title">Google Maps & Local SEO</div>
+          <div class="ib-sub">Điểm chạm quan trọng nhất với khách hàng địa phương</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Phát hiện quan trọng</div>
+          <div class="fc-title">Phước Thịnh đã được xếp hạng #1 trong danh sách Top 5 đơn vị nội thất Long Khánh</div>
+          <div class="fc-body">Trang DongNaiReview.vn (tháng 4/2026) xếp Phước Thịnh ở vị trí số 1 trong danh sách "5 đơn vị thiết kế thi công nội thất ở Long Khánh". Đây là tín hiệu tốt về uy tín thực tế — bên thứ 3 độc lập đã ghi nhận Phước Thịnh là đơn vị dẫn đầu khu vực.</div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-blue">Đã xác nhận</div>
+          <div class="fc-title">Google Business Profile đã được claim — có địa chỉ showroom chính xác</div>
+          <div class="fc-body">Showroom: <strong>462C Hồ Thị Hương, Khu phố 2, Phường Xuân Hòa, Long Khánh, Đồng Nai</strong>. Đây là tín hiệu tốt — Phước Thịnh đã có mặt trên Google Maps với thông tin định danh rõ ràng. Bước tiếp theo là audit độ đầy đủ của profile: ảnh showroom, giờ mở cửa, danh mục sản phẩm, số lượng và chất lượng review — để xác định Local SEO đang ở mức nào và cần bổ sung gì để cạnh tranh tốt hơn trong Google Maps 3-pack.</div>
+        </div>
+        <div class="find-card full">
+          <div class="fc-label fcl-navy">Phát hiện bổ sung</div>
+          <div class="fc-title">2 địa điểm vật lý khác nhau — showroom và nhà máy không cùng địa chỉ</div>
+          <div class="fc-body">Showroom (mặt tiền, tiếp khách) tại <strong>462C Hồ Thị Hương, Khu phố 2, Xuân Hòa</strong> — còn nhà máy sản xuất tại <strong>Đường số 4, Tổ 14, Khu phố Bàu Trâm</strong>, theo thông tin trên website B2B. Đây là điểm cần làm rõ trong content: khách hàng cần biết rõ "đến đâu để xem sản phẩm" (showroom) và "nơi sản phẩm được làm ra" (nhà máy) — cả hai đều là tài sản content giá trị nếu được kể đúng cách.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#2B6BFF" stroke-width="1.8"/><path d="m21 21-4.35-4.35" stroke="#2B6BFF" stroke-width="1.8"/></svg></div>
+        <div>
+          <div class="ib-title">On-page SEO — Cả 2 website</div>
+          <div class="ib-sub">Đánh giá dựa trên dữ liệu meta tag và cấu trúc website</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Website .vn (bán lẻ)</div>
+          <div class="fc-title">Meta description trống — Google tự tạo snippet không kiểm soát được</div>
+          <div class="fc-body">
+            <table class="seo-table">
+              <tr><td>Title tag</td><td class="seo-val">"Nội Thất Phước Thịnh - Phát Triển Cùng Uy Tín"</td></tr>
+              <tr><td>Meta description</td><td class="seo-bad">Trống — không có</td></tr>
+              <tr><td>OG image</td><td class="seo-bad">Trống — share lên mạng xã hội sẽ không có ảnh preview</td></tr>
+              <tr><td>Keywords meta</td><td class="seo-bad">Trống</td></tr>
+              <tr><td>Canonical</td><td class="seo-val">Có — noithatphuocthinh.vn</td></tr>
+              <tr><td>Robots</td><td class="seo-good">index, follow — OK</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-blue">Website .com.vn (B2B)</div>
+          <div class="fc-title">Cấu trúc tốt hơn nhưng vẫn thiếu content targeting Long Khánh</div>
+          <div class="fc-body">
+            <table class="seo-table">
+              <tr><td>Title tag</td><td class="seo-val">"Nội thất Phước Thịnh – Phát triển cùng uy tín"</td></tr>
+              <tr><td>Meta description</td><td class="seo-bad">Trống</td></tr>
+              <tr><td>Nền tảng</td><td class="seo-val">WordPress + Elementor 3.30.2</td></tr>
+              <tr><td>Từ khóa local</td><td class="seo-bad">"Long Khánh" không xuất hiện trong title/desc</td></tr>
+              <tr><td>Ảnh alt text</td><td class="seo-bad">Chưa xác nhận — cần kiểm tra trực tiếp</td></tr>
+              <tr><td>Page speed</td><td class="seo-bad">Chưa đo — ảnh lỗi có thể ảnh hưởng score</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="find-card full">
+          <div class="fc-label fcl-navy">Vấn đề nghiêm trọng</div>
+          <div class="fc-title">Không có nội dung targeting keyword địa phương — bỏ qua tệp tìm kiếm địa lý</div>
+          <div class="fc-body">Khách hàng Long Khánh thường search: <strong>"nội thất gỗ tự nhiên Long Khánh"</strong>, <strong>"showroom nội thất đẹp Long Khánh Đồng Nai"</strong>, <strong>"bàn ghế gỗ óc chó Long Khánh"</strong>. Hai website hiện tại đều không có landing page hay bài viết nào targeting những keyword này một cách có chủ đích. Title tag không chứa "Long Khánh", meta description trống, không có blog hay content hub về sản phẩm gỗ theo loại. Đây là khoảng trắng SEO lớn — đặc biệt khi đối thủ cạnh tranh trực tiếp trong phân khúc cao cấp gần như không có ai.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-block" style="margin-bottom:0;">
+      <div class="ib-header">
+        <div class="ib-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#2B6BFF" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="#2B6BFF" stroke-width="1.8"/></svg></div>
+        <div>
+          <div class="ib-title">Email & Zalo — Kênh chuyển đổi bị phân mảnh</div>
+          <div class="ib-sub">Điểm cuối của phễu đang không nhất quán</div>
+        </div>
+      </div>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="fc-label fcl-navy">Vấn đề nhận diện</div>
+          <div class="fc-title">3 email khác nhau trên các kênh — khách không biết liên hệ đâu</div>
+          <div class="fc-body">
+            <div class="dot-row"><div class="dot d-navy"></div><strong>noithatphuocthinh2311@gmail.com</strong> — trên website .vn và .com.vn</div>
+            <div class="dot-row"><div class="dot d-navy"></div><strong>duan@noithatphuocthinh.vn</strong> — trên DongNaiReview listing</div>
+            <div class="dot-row"><div class="dot d-navy"></div>Zalo cá nhân <strong>0915920048</strong> — trên website .vn</div>
+            <div class="dot-row"><div class="dot d-blue"></div>Zalo OA — chỉ có QR trên website .com.vn, chưa được quảng bá</div>
+            Khách hàng đến từ các kênh khác nhau đang được dẫn đến các điểm liên hệ khác nhau — không có funnel nhất quán.
+          </div>
+        </div>
+        <div class="find-card">
+          <div class="fc-label fcl-blue">Cơ hội bỏ lỡ</div>
+          <div class="fc-title">Zalo OA chưa được khai thác làm kênh chuyển đổi chính</div>
+          <div class="fc-body">Zalo OA tại Việt Nam có tỷ lệ open rate cao hơn email nhiều lần, đặc biệt với tệp khách hàng 35-55 tuổi tại tỉnh thành. Zalo OA đã tồn tại nhưng đang "ẩn" — không được link từ fanpage Facebook, không được đề cập trong caption, không có CTA dẫn về Zalo trong bất kỳ bài post nào. Đây là kênh lẽ ra phải là điểm chuyển đổi chính, hiện đang gần như không hoạt động.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 COMPETITIVE LANDSCAPE -->
+<div class="sb">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">04 — Competitive Landscape</div>
+      <h2 class="s-title">Đối thủ đang làm gì — Long Khánh & toàn Đồng Nai</h2>
+      <p class="s-desc">Phân tích bối cảnh cạnh tranh ở hai cấp độ: thị trường gần nhất (Long Khánh) và thị trường mở rộng (Biên Hòa, Trảng Bom, Hố Nai) — nơi kế hoạch tháng 2 sẽ vươn tới.</p>
+    </div>
+
+    <p style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--blue); margin-bottom:14px;">Cấp độ 1 — Long Khánh</p>
+    <table class="comp-table" style="margin-bottom:32px;">
+      <thead>
+        <tr>
+          <th style="width:200px;">Đơn vị</th>
+          <th>Định vị</th>
+          <th style="width:130px;">Phân khúc</th>
+          <th style="width:160px;">Digital presence</th>
+          <th style="width:160px;">So với Phước Thịnh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="comp-name">Nội Thất Hân Gia Phát</div><div class="comp-sub">180 Nguyễn Trãi, Long Khánh</div></td>
+          <td><div class="fc-body">Đối tác giải pháp gỗ của An Cường. Thiên về xu hướng hiện đại, Laminate 2025. Phục vụ nhà ở lẫn FnB.</div></td>
+          <td><span class="comp-tag ct-mid">Trung - Cao</span></td>
+          <td><div class="fc-body">Facebook đang hoạt động, website hangiaphat.vn</div></td>
+          <td><span class="comp-tag ct-pt">Cạnh tranh gián tiếp</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Hoàng Phát House</div><div class="comp-sub">117 Bàu Cối, Long Khánh</div></td>
+          <td><div class="fc-body">Thi công trọn gói 3D đến lắp đặt. Tập trung nhà ở, minh bạch quy trình.</div></td>
+          <td><span class="comp-tag ct-mid">Trung bình</span></td>
+          <td><div class="fc-body">Website hoangphathouse.vn, Facebook hoạt động</div></td>
+          <td><span class="comp-tag ct-pt">Cạnh tranh gián tiếp</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Kim Ngân</div><div class="comp-sub">Đường 21/4, Long Khánh</div></td>
+          <td><div class="fc-body">"Uy tín và cạnh tranh tại Long Khánh" — tự định vị rõ ràng về giá cạnh tranh. Đa dạng mẫu mã, phục vụ nhiều đối tượng.</div></td>
+          <td><span class="comp-tag ct-mid">Bình dân - Trung</span></td>
+          <td><div class="fc-body">Website xuongnoithatkimngan.com, đang hoạt động</div></td>
+          <td><span class="comp-tag ct-win">Khác phân khúc</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Nội Thất Long Khánh (Hân Gia Phát)</div><div class="comp-sub">Facebook page</div></td>
+          <td><div class="fc-body">Fanpage riêng với 21.915 likes — con số rất ấn tượng so với 94 likes của Phước Thịnh.</div></td>
+          <td><span class="comp-tag ct-mid">Trung bình</span></td>
+          <td><div class="fc-body">Fanpage mạnh — 21.915 likes, đang hoạt động</div></td>
+          <td><span class="comp-tag ct-pt">Cạnh tranh về visibility</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--blue); margin-bottom:14px;">Cấp độ 2 — Toàn Đồng Nai (Biên Hòa, Trảng Bom, Hố Nai)</p>
+    <table class="comp-table" style="margin-bottom:32px;">
+      <thead>
+        <tr>
+          <th style="width:200px;">Đơn vị</th>
+          <th>Định vị</th>
+          <th style="width:130px;">Phân khúc</th>
+          <th style="width:160px;">Digital presence</th>
+          <th style="width:160px;">So với Phước Thịnh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="comp-name">Nội thất Văn Viện</div><div class="comp-sub">57 Phan Trung, P. Tân Tiến, Biên Hòa</div></td>
+          <td><div class="fc-body">Tự định vị rõ là "thương hiệu đồ gỗ cao cấp", nhấn mạnh tính nghệ nhân và quy trình chuẩn mực — đối thủ định vị gần nhất với Phước Thịnh trên toàn tỉnh.</div></td>
+          <td><span class="comp-tag ct-pt">Cao cấp</span></td>
+          <td><div class="fc-body">Website + nội dung định vị bài bản</div></td>
+          <td><span class="comp-tag ct-pt">Đối thủ định vị gần nhất</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Đồ Gỗ Triệu Vy</div><div class="comp-sub">Biên Hòa — chuỗi 4.000m² sàn</div></td>
+          <td><div class="fc-body">30 năm kinh nghiệm, quy mô lớn, đa dạng mẫu mã gỗ quý (gõ đỏ, hương đá, mun). Định vị "giá tốt nhất khu vực" — ưu tiên số lượng và giá hơn là câu chuyện thương hiệu.</div></td>
+          <td><span class="comp-tag ct-mid">Trung - Cao</span></td>
+          <td><div class="fc-body">Hiện diện trong nhiều bài review tổng hợp</div></td>
+          <td><span class="comp-tag ct-pt">Cạnh tranh về quy mô</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Đồ Gỗ Xuân Bắc</div><div class="comp-sub">521 Xa Lộ Hà Nội, Long Bình, Biên Hòa</div></td>
+          <td><div class="fc-body">2.000m², 150 mẫu mã, nhấn mạnh "giá niêm yết rõ ràng", bảo hành trọn đời. Định vị minh bạch hơn là cao cấp.</div></td>
+          <td><span class="comp-tag ct-mid">Trung bình</span></td>
+          <td><div class="fc-body">Website, nội dung review tốt</div></td>
+          <td><span class="comp-tag ct-win">Khác phân khúc</span></td>
+        </tr>
+        <tr>
+          <td><div class="comp-name">Cụm xưởng gỗ Hố Nai</div><div class="comp-sub">Thùy Tiên, Xuân Bắc, Tâm Thảo và nhiều xưởng khác</div></td>
+          <td><div class="fc-body">"Thủ phủ nội thất miền Nam" theo cách gọi của báo chí địa phương — hàng chục xưởng cạnh tranh chủ yếu bằng "giá xưởng tận gốc", phục vụ khách mua sỉ và lẻ giá rẻ.</div></td>
+          <td><span class="comp-tag ct-mid">Bình dân - Trung</span></td>
+          <td><div class="fc-body">Mỗi xưởng có Facebook/website riêng lẻ</div></td>
+          <td><span class="comp-tag ct-win">Khác phân khúc hoàn toàn</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="find-grid">
+      <div class="find-card">
+        <div class="fc-label fcl-navy">Phát hiện quan trọng nhất</div>
+        <div class="fc-title">Toàn Đồng Nai chỉ có 1 đối thủ thực sự định vị cao cấp — và họ chưa có lợi thế sản xuất như Phước Thịnh</div>
+        <div class="fc-body">Thị trường Đồng Nai rất sôi động về số lượng (hàng chục xưởng và cửa hàng, đặc biệt tập trung ở Hố Nai), nhưng gần như tất cả đều cạnh tranh bằng "giá xưởng", "giá rẻ", "đa dạng mẫu mã" — không xây dựng câu chuyện thương hiệu hay định vị cao cấp rõ ràng. Nội thất Văn Viện là ngoại lệ duy nhất tự định vị "cao cấp", nhưng không thấy đề cập đến nhà máy sản xuất riêng hay quy mô như Phước Thịnh (5.000m², 22 năm). Đây là khoảng trắng thực sự: <strong>không chỉ ở Long Khánh mà trên toàn tỉnh, chưa ai kết hợp được quy mô sản xuất lớn với định vị cao cấp nhất quán.</strong></div>
+      </div>
+      <div class="find-card">
+        <div class="fc-label fcl-blue">Rủi ro cần lưu ý khi mở rộng</div>
+        <div class="fc-title">Biên Hòa là thị trường đông đối thủ hơn nhiều so với Long Khánh — cần định vị rõ ngay từ đầu</div>
+        <div class="fc-body">Khi kế hoạch mở rộng sang Đồng Nai và TP.HCM sau tháng đầu, Phước Thịnh sẽ cạnh tranh trực tiếp với mật độ đối thủ cao hơn nhiều, đặc biệt tại khu vực Hố Nai — nơi được báo chí gọi là "thủ phủ nội thất miền Nam". Ở mật độ này, định vị mơ hồ sẽ khiến Phước Thịnh bị hòa lẫn vào nhóm "giá xưởng". Ngược lại, nếu giữ vững định vị cao cấp đã xây dựng từ Long Khánh, Phước Thịnh có thể là một trong rất ít lựa chọn rõ ràng cho nhóm khách hàng không tìm "giá xưởng" mà tìm "giá trị" tại Biên Hòa.</div>
+      </div>
+      <div class="find-card full">
+        <div class="fc-label fcl-navy">Khoảng cách digital đáng lo</div>
+        <div class="fc-title">Đối thủ trung bình tại Long Khánh có fanpage 21.915 likes — Phước Thịnh chỉ có 94</div>
+        <div class="fc-body">Fanpage "Nội Thất Long Khánh" (không phải Phước Thịnh) đang có 21.915 likes — gấp hơn 230 lần fanpage của Phước Thịnh. Dù phân khúc khác nhau, chênh lệch về visibility này cho thấy mức độ bị lãng quên của Phước Thịnh trên digital ngay tại thị trường gần nhất. Khi mở rộng sang Đồng Nai — nơi mật độ đối thủ còn cao hơn — khoảng cách này cần được thu hẹp trước, không thể mang nguyên trạng đi mở rộng.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 WHAT WE NEED -->
+<div class="sn">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label lt">05 — Bước tiếp theo</div>
+      <h2 class="s-title lt">Hoàn thiện bức tranh trong Discovery Meeting</h2>
+      <p class="s-desc lt">D STUDIO đã có đủ insight để bắt đầu xây kế hoạch 3 tháng. Một vài điểm dưới đây sẽ được xác nhận trực tiếp cùng Phước Thịnh ngay trong buổi làm việc đầu tiên — không làm chậm tiến độ, chỉ giúp kế hoạch chính xác hơn từ ngày đầu.</p>
+    </div>
+    <div class="need-grid">
+      <div class="need-card">
+        <div class="need-num">01</div>
+        <div class="need-title">TikTok — xem trực tiếp trên app</div>
+        <div class="need-body">D STUDIO đã đọc được triệu chứng từ bên ngoài: kênh vô hình trên Google = chưa có video breakthrough. Để xác nhận và lên content plan cụ thể, cần xem trong app: video nào có view cao nhất, comment section khách hỏi gì. 10 phút trong Discovery Meeting là đủ.</div>
+      </div>
+      <div class="need-card">
+        <div class="need-num">02</div>
+        <div class="need-title">YouTube Studio — cả 2 kênh</div>
+        <div class="need-body">Subscriber chính xác và video nào từng có tương tác tốt sẽ giúp quyết định merge/archive @gophuocthinh diễn ra nhanh và chính xác, không bỏ lỡ nội dung đã có giá trị.</div>
+      </div>
+      <div class="need-card">
+        <div class="need-num">03</div>
+        <div class="need-title">Audit chi tiết Google Business Profile</div>
+        <div class="need-body">Đã xác nhận profile tồn tại với địa chỉ đúng. Bước tiếp theo: kiểm tra số lượng và nội dung review, ảnh hiện có, giờ mở cửa đã cập nhật chưa — để biết chính xác cần bổ sung gì cho Local SEO.</div>
+      </div>
+      <div class="need-card">
+        <div class="need-num">04</div>
+        <div class="need-title">Facebook Page Insights</div>
+        <div class="need-body">Organic reach thực tế, demographics của 94 followers hiện có, bài nào từng có engagement tốt hơn — giúp D STUDIO không phải bắt đầu từ con số 0 khi lên content mới.</div>
+      </div>
+      <div class="need-card">
+        <div class="need-num">05</div>
+        <div class="need-title">Website analytics</div>
+        <div class="need-body">Nếu đã có Google Analytics, xem traffic đến từ đâu sẽ giúp định hướng kênh ưu tiên ngay từ đầu. Nếu chưa có, D STUDIO sẽ cài đặt song song với Pixel Meta trong tuần 1.</div>
+      </div>
+      <div class="need-card">
+        <div class="need-num">06</div>
+        <div class="need-title">Xử lý lỗi ảnh website</div>
+        <div class="need-body">Cần biết hosting ở đâu và ai đang quản lý kỹ thuật để D STUDIO phối hợp xử lý nhanh nhất. Đây là việc ưu tiên tuyệt đối trước mọi hoạt động marketing khác.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BRIDGE: TỪ AUDIT SANG KẾ HOẠCH -->
+<div class="bridge">
+  <div class="bridge-icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#A6FF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <h2 class="bridge-title">Phía trên là <span>bức tranh hiện tại</span>.<br>Phía dưới là cách D STUDIO thay đổi nó.</h2>
+  <p class="bridge-desc">Mỗi dòng trong audit phía trên đều có một hệ quả cụ thể trong kế hoạch này — không phải hai tài liệu tách biệt, mà một mạch tư duy liên tục. Tháng đầu tiên không bắt đầu bằng việc đăng bài, mà bắt đầu bằng việc dọn sạch những gì đang cản trở khách hàng tin tưởng Phước Thịnh ngay từ cái nhìn đầu tiên.</p>
+  <div class="bridge-arrow-down">↓</div>
+</div>
+<!-- 00 CƠ CHẾ VẬN HÀNH: TEST ON ADS, SCALE ON ORGANIC -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">00 — Cơ chế vận hành cốt lõi</div>
+      <h2 class="s-title">Test trên Ads, nhân rộng trên Organic</h2>
+      <p class="s-desc">Thay vì tách biệt content organic và quảng cáo, D STUDIO vận hành cả hai như <strong>một hệ thống liên kết</strong>: ngân sách ads đóng vai trò "phòng thí nghiệm" — test nhiều content angle với chi phí thấp, đo bằng dữ liệu thực tế, sau đó nhân bản angle thắng thành nội dung organic. Ngân sách ads vì vậy được điều chỉnh giảm so với proposal gốc, phần chênh lệch chuyển sang đầu tư cho khối lượng content organic nhiều hơn.</p>
+    </div>
+
+    <div class="mech-box">
+      <div class="phase-badge">Vòng lặp 2 tuần/lần</div>
+      <p style="color:rgba(255,255,255,.7); font-size:14px; max-width:760px; line-height:1.7;">Mỗi 2 tuần là một chu kỳ test hoàn chỉnh — đủ thời gian để có dữ liệu đáng tin cậy nhưng không quá dài để bỏ lỡ nhịp triển khai. 3 tháng tương đương khoảng 5–6 chu kỳ test, tạo ra một ngân hàng content angle đã được kiểm chứng trước khi bước vào tháng 2 — giai đoạn tăng tốc.</p>
+
+      <div class="mech-flow">
+        <div class="mech-step">
+          <div class="mech-step-num">Bước 1 — Test</div>
+          <div class="mech-step-title">Chạy 3–5 content angle trên ads ngân sách nhỏ</div>
+          <div class="mech-step-body">Mỗi đợt 2 tuần, D STUDIO sản xuất 3–5 phiên bản content khác góc (sản phẩm, quy trình, câu chuyện thợ, B2B social proof...) và chạy đồng thời dưới dạng Traffic + Engagement campaign, ngân sách chia đều.</div>
+          <div class="mech-metrics">
+            <span class="mech-metric-tag">Hook Hold Rate</span>
+            <span class="mech-metric-tag">CTR</span>
+            <span class="mech-metric-tag">Engagement Rate</span>
+          </div>
+        </div>
+        <div class="mech-arrow">→</div>
+        <div class="mech-step">
+          <div class="mech-step-num">Bước 2 — Đo & Chọn</div>
+          <div class="mech-step-title">Xác định angle thắng dựa trên dữ liệu, không phải cảm tính</div>
+          <div class="mech-step-body">Cuối mỗi đợt, D STUDIO phân tích chỉ số thực tế: angle nào giữ chân người xem lâu nhất, có CTR cao nhất, tạo nhiều bình luận/chia sẻ nhất. Angle thắng được xác nhận bằng số liệu cụ thể trong báo cáo gửi Phước Thịnh.</div>
+          <div class="mech-metrics">
+            <span class="mech-metric-tag">Top 1-2 angle</span>
+            <span class="mech-metric-tag">Báo cáo dữ liệu</span>
+          </div>
+        </div>
+        <div class="mech-arrow">→</div>
+        <div class="mech-step">
+          <div class="mech-step-num">Bước 3 — Nhân rộng</div>
+          <div class="mech-step-title">Biến angle thắng thành nhiều biến thể organic</div>
+          <div class="mech-step-body">Angle đã thắng không chỉ được đăng lại — D STUDIO khai thác sâu hơn: tạo thêm góc quay khác, version dài hơn cho YouTube, cắt ngắn cho TikTok, viết caption mới khai thác cùng insight đã được chứng minh hiệu quả.</div>
+          <div class="mech-metrics">
+            <span class="mech-metric-tag">3-4 bài organic/angle</span>
+            <span class="mech-metric-tag">Đa nền tảng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" style="margin:40px 0;"></div>
+
+    <div class="budget-split">
+      <div class="budget-card">
+        <div class="budget-pct">↓ Giảm</div>
+        <div class="budget-title">Ngân sách Ads</div>
+        <div class="budget-body">Giảm so với phân bổ trong proposal gốc — vì vai trò của ads trong giai đoạn này là <strong>test signal</strong>, không phải scale traffic. Chạy ở mức đủ để có dữ liệu đáng tin cậy (đủ impression để đo Hook Hold Rate, CTR), không cần ngân sách lớn để "phủ rộng" như một chiến dịch kích hoạt thông thường.</div>
+      </div>
+      <div class="budget-card accent">
+        <div class="budget-pct">↑ Tăng</div>
+        <div class="budget-title">Nguồn lực Content Organic</div>
+        <div class="budget-body">Phần chênh lệch ngân sách được chuyển sang đầu tư cho khối lượng và chất lượng content organic — nhiều biến thể hơn cho mỗi angle thắng, đăng đa nền tảng (Facebook, TikTok, YouTube) thay vì chỉ một kênh.</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <div class="note-icon">!</div>
+      <div class="note-text"><strong>Vì sao cách này phù hợp với giai đoạn hiện tại của Phước Thịnh:</strong> Audit cho thấy brand foundation (visual, fanpage, website) đang yếu — chạy ads quy mô lớn vào lúc này tốn kém và rủi ro (giống bài học từ agency trước). Mô hình test nhỏ trên ads giúp xác định content nào thực sự cộng hưởng với khách hàng Long Khánh trước khi đầu tư mạnh — giảm rủi ro tài chính trong giai đoạn xây nền, đồng thời tạo ra organic content có cơ sở dữ liệu thay vì đoán mò.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 THÁNG CÓ LÂU KHÔNG? — PHÂN TÍCH TIMING -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">Một câu hỏi cần trả lời trước khi đọc tiếp</div>
+      <h2 class="s-title">3 tháng cho Long Khánh — có đang đi quá chậm?</h2>
+      <p class="s-desc">Một câu hỏi hợp lý: nếu lộ trình mở rộng còn Long Thành, Xuân Lộc, Nhơn Trạch, Biên Hòa phía trước — liệu dành trọn 3 tháng đầu chỉ cho Long Khánh có phải đang lãng phí thời gian?</p>
+    </div>
+
+    <div class="find-grid">
+      <div class="find-card">
+        <div class="fc-label fcl-navy">Điều quan trọng cần làm rõ</div>
+        <div class="fc-title">3 tháng này không phải "3 tháng mở rộng chậm" — mà là "3 tháng ổn định trước khi mở rộng"</div>
+        <div class="fc-body">Kế hoạch không hề đứng yên ở Long Khánh suốt 3 tháng. Long Thành đã được thăm dò từ Tháng 2 bằng một campaign nhỏ — đủ để có dữ liệu sớm mà không cần chờ đến Q2. Sự khác biệt là: Phước Thịnh sẽ <strong>bước vào Long Thành với một thương hiệu đã được kiểm chứng</strong>, không phải mang nguyên trạng fanpage 94 likes và content chưa định hình sang một thị trường mới.</div>
+      </div>
+      <div class="find-card">
+        <div class="fc-label fcl-blue">Rủi ro nếu đẩy nhanh hơn</div>
+        <div class="fc-title">Mở rộng sớm khi thương hiệu chưa vững = nhân đôi vấn đề, không nhân đôi kết quả</div>
+        <div class="fc-body">Nếu chạy campaign mở rộng đầy đủ sang Long Thành ngay từ Tháng 1-2, khách hàng tại đó sẽ gặp đúng những vấn đề audit đã chỉ ra: định vị mơ hồ, fanpage ít tương tác, chưa có content đã kiểm chứng hiệu quả. Ngân sách test ở thị trường mới trong lúc thương hiệu còn yếu là rủi ro tài chính không cần thiết — số liệu thu được cũng không đáng tin cậy để dùng làm cơ sở quyết định lâu dài.</div>
+      </div>
+      <div class="find-card full">
+        <div class="fc-label fcl-navy">Cơ sở từ ngành</div>
+        <div class="fc-title">Chu kỳ quyết định mua nội thất cao cấp tự nó đã cần thời gian — vấn đề không phải tốc độ launch, mà là tốc độ tin tưởng</div>
+        <div class="fc-body">Khách hàng nội thất cao cấp thường mất 2–8 tuần để ra quyết định, và các nguồn tư vấn mua sắm khuyên nên bắt đầu tìm hiểu từ 2-3 tháng trước khi cần dùng. Trong khoảng thời gian đó, thứ quyết định không phải việc thương hiệu xuất hiện sớm hay muộn, mà là mức độ tin tưởng được xây dựng qua mỗi điểm chạm. 3 tháng đầu — với 4 đợt test đã kiểm chứng và brand foundation ổn định — chính là khoảng thời gian tối thiểu để Phước Thịnh có đủ "vốn tin tưởng" trước khi nhân rộng sang thị trường mới. Rút ngắn hơn nữa không tăng tốc độ tăng trưởng, chỉ tăng rủi ro đốt ngân sách vào nền tảng chưa đủ chắc.</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <div class="note-icon">→</div>
+      <div class="note-text"><strong>Kết luận:</strong> Giữ nguyên 3 tháng cho Long Khánh là quyết định đúng nhịp — không chậm, không thừa. Long Thành đã được đưa vào lộ trình từ Tháng 2 dưới dạng thăm dò có chủ đích, để khi chính thức mở rộng ở Q2, D STUDIO đã có sẵn dữ liệu thay vì bắt đầu lại từ con số 0.</div>
+    </div>
+  </div>
+</div>
+
+<!-- THÁNG 1 — NỀN TẢNG -->
+<div class="sb">
+  <div class="page">
+    <div class="sh">
+      <div class="phase-badge">Tháng 1 — Nền tảng</div>
+      <h2 class="s-title">Dọn nền nhanh, vào marketing sớm</h2>
+      <p class="s-desc">Phần nền tảng được nén còn <strong>2 tuần</strong> thay vì kéo dài cả tháng — vì Phước Thịnh đã có sẵn một bộ ảnh chất lượng tạm ổn từ lần hợp tác trước, chỉ cần hậu kỳ và crop lại cho đúng tone mới, không cần chờ chụp lại từ đầu. Việc chụp bổ sung (nhà máy, video quy trình) sẽ chạy song song ở các tuần sau, không chặn tiến độ marketing. Tuần 3 đã có thể bắt đầu Đợt Test #1.</p>
+    </div>
+
+    <div class="month-summary">
+      <div class="ms-card"><div class="ms-label">Trọng tâm</div><div class="ms-val">Fix kỹ thuật + Hậu kỳ ảnh cũ</div></div>
+      <div class="ms-card"><div class="ms-label">Ads</div><div class="ms-val">Bắt đầu test từ Tuần 3</div></div>
+      <div class="ms-card"><div class="ms-label">Content organic</div><div class="ms-val">6–8 bài, dùng ảnh cũ hậu kỳ</div></div>
+      <div class="ms-card"><div class="ms-label">Milestone cuối tháng</div><div class="ms-val">Fanpage mới + Đợt Test #1 hoàn tất</div></div>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">1</div>
+          <div>
+            <div class="week-title">Discovery, xử lý kỹ thuật khẩn cấp & Thu thập ảnh cũ</div>
+            <div class="week-sub">Tuần đầu tiên sau ký hợp đồng</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Audit xác nhận + Brief duyệt</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-all">PT + DS</span>
+            <div class="task-text"><strong>Discovery Meeting:</strong> xác nhận quyền truy cập YouTube Studio, TikTok, Facebook Insights, Google Business Profile. Quyết định kênh YouTube chính (@noithatphuocthinh), thống nhất xử lý kênh cũ.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text"><strong>Bàn giao file ảnh gốc</strong> từ đội chụp trước đó (sản phẩm, showroom) — đây là nguyên liệu chính cho fanpage mới, không cần chờ chụp lại.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Cung cấp thông tin kỹ thuật website: hosting, ai quản lý, để D STUDIO phối hợp xử lý lỗi ảnh trên cả 2 website.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text"><strong>Bắt đầu xử lý lỗi ảnh website</strong> (noithatphuocthinh.vn + .com.vn) — ưu tiên tuyệt đối, deadline trong tuần.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Setup Meta Business Manager + cài Pixel trên cả 2 website ngay khi ảnh được fix.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Chọn lọc và phân loại ảnh cũ theo chất lượng, lên kế hoạch hậu kỳ (crop, chỉnh màu, đồng bộ tone) theo định vị cao cấp mới.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Viết lại mô tả & thông tin fanpage Facebook — xoá "gỗ công nghiệp", định vị lại theo gỗ tự nhiên nguyên khối cao cấp.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Bộ ảnh cũ đã phân loại</span>
+          <span class="deliv-tag">Pixel đã cài</span>
+          <span class="deliv-tag">Fanpage info đã sửa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">2</div>
+          <div>
+            <div class="week-title">Hậu kỳ ảnh cũ, dựng nhận diện mới & Audit TikTok/YouTube</div>
+            <div class="week-sub">Nền tảng visual sẵn sàng để vào marketing ngay tuần sau</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Bộ ảnh hậu kỳ + Template sẵn sàng</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Hậu kỳ bộ ảnh cũ: crop lại bố cục, chỉnh màu đồng bộ, loại bỏ ảnh không đạt chuẩn — đủ dùng để khởi động fanpage mới mà không cần chờ chụp lại.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Dựng bộ nhận diện mới: avatar, ảnh bìa, 3–4 template post — áp dụng trực tiếp lên bộ ảnh đã hậu kỳ.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Xem trực tiếp TikTok @noithatphuocthinhlk và YouTube Studio cùng Phước Thịnh — xác định video nào (nếu có) từng có tín hiệu tốt hơn để tham khảo.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Bắt đầu archive/redirect kênh YouTube @gophuocthinh theo quyết định Tuần 1; re-upload nội dung còn giá trị sang kênh chính.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Đăng 2–3 bài đầu tiên bằng ảnh cũ đã hậu kỳ, caption viết theo định vị mới — không còn là "bài cầm chừng" mà đã đúng chuẩn fanpage mới.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Thay Zalo cá nhân trên website .vn bằng Zalo OA; quảng bá Zalo OA trên fanpage để hợp nhất điểm liên hệ.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Fanpage mới hoàn chỉnh</span>
+          <span class="deliv-tag">Bộ template post</span>
+          <span class="deliv-tag">2-3 bài đầu tiên</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">3</div>
+          <div>
+            <div class="week-title">Bắt đầu Đợt Test #1 & Chụp bổ sung song song</div>
+            <div class="week-sub">Khởi động cơ chế Test-to-Organic ngay khi nền tảng sẵn sàng</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Đợt Test #1 live</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Sản xuất 3–5 content angle cho Đợt Test #1 từ bộ ảnh cũ đã hậu kỳ: sản phẩm cận cảnh, quy trình thủ công, câu chuyện thợ mộc, B2B social proof, gỗ nguyên khối nguồn gốc.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text"><strong>Khởi động Đợt Test #1</strong> — chạy Traffic + Engagement campaign cho 3–5 angle, ngân sách chia đều, target tệp chủ nhà 32–50 tuổi tại Long Khánh.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text"><strong>Chụp bổ sung song song:</strong> lên lịch quay video tại nhà máy (5.000m²) — góc còn thiếu trong bộ ảnh cũ — không làm chậm content đang chạy.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Duy trì 2–3 bài/tuần trên fanpage bằng ảnh cũ đã hậu kỳ, xen kẽ nội dung từ Đợt Test #1.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Bắt đầu đăng đều trên kênh YouTube chính theo lịch đã thiết lập.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Cắt dựng video ngắn từ tư liệu cũ (nếu có) cho TikTok/Reels trong lúc chờ tư liệu nhà máy mới.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">3-5 angle đang chạy test</span>
+          <span class="deliv-tag">Lịch quay nhà máy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEST BRIEF #1 — CHI TIẾT -->
+    <div style="margin: 28px 0 32px;">
+      <div class="phase-badge" style="background:var(--lb); color:var(--blue); border:1px solid #C7DCFF;">Đặc tả chi tiết — Đợt Test #1</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--navy); margin-bottom:10px;">5 content angle sẽ test trong Tuần 3</h3>
+      <p class="test-brief-intro">Mỗi angle nhắm vào một động lực mua hàng khác nhau của tệp mục tiêu (chủ nhà 32–50 tuổi, đang xây/sửa nhà, thu nhập khá, tại Long Khánh và lân cận). Ngân sách Test #1 chia đều 5 angle, chạy song song Traffic + Engagement trong 14 ngày để có đủ dữ liệu so sánh công bằng.</p>
+
+      <div class="test-summary-bar">
+        <div class="tsb-item"><div class="tsb-label">Thời lượng</div><div class="tsb-val">14 ngày</div></div>
+        <div class="tsb-item"><div class="tsb-label">Số angle</div><div class="tsb-val">5 angle song song</div></div>
+        <div class="tsb-item"><div class="tsb-label">Loại campaign</div><div class="tsb-val">Traffic + Engagement</div></div>
+        <div class="tsb-item"><div class="tsb-label">Chỉ số quyết định thắng</div><div class="tsb-val lime">Hook Hold Rate · CTR · Engagement</div></div>
+      </div>
+
+      <div class="test-brief-intro" style="background:var(--lb); border:1px solid #C7DCFF; border-radius:12px; padding:16px 20px; margin-bottom:18px;"><strong style="color:var(--navy);">Insight làm trục cho cả 5 angle:</strong> Khách hàng nội thất cao cấp không sợ tốn tiền — họ sợ <em style="color:var(--blue); font-style:normal; font-weight:600;">chọn sai và phải sống chung với sai lầm đó mỗi ngày trong nhiều năm</em>. Nỗi sợ "lỗi thời, xuống cấp, hối hận" lớn hơn nhiều so với nỗi sợ về giá — 5 angle dưới đây khai thác insight này theo 5 cách khác nhau, không angle nào lặp lại mô-típ "khoe quy trình sản xuất" thường thấy trong ngành.</div>
+
+      <!-- ANGLE 1 -->
+      <div class="test-angle-card">
+        <div class="ta-head">
+          <div class="ta-num">1</div>
+          <div class="ta-name">Câu hỏi không ai hỏi khi mua nội thất</div>
+          <span class="ta-format">Video 20-25s</span>
+        </div>
+        <div class="ta-body">
+          <div class="ta-row"><div class="ta-row-label">Chủ đề</div><div class="ta-row-val">Mở bằng một câu hỏi ngược với thói quen ("giá bao nhiêu") — thay vào đó hỏi thẳng vào nỗi sợ dài hạn. Hình ảnh đối lập: một góc phòng khách với nội thất cũ kỹ, lỗi mốt, rồi cắt sang sản phẩm Phước Thịnh trong không gian hiện đại.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Hook 3 giây</div><div class="ta-row-val"><em>"10 năm nữa nhìn lại, bạn có còn thích bộ bàn ghế này không?"</em></div></div>
+          <div class="ta-row"><div class="ta-row-label">Nội dung</div><div class="ta-row-val">Video chậm, không nhạc kịch tính — quét qua một không gian nội thất lỗi thời (có thể dùng ảnh stock hoặc tư liệu thật), giữ im lặng 1-2 giây, rồi cắt sang sản phẩm Phước Thịnh. Không cần giọng đọc, chỉ 1 dòng text overlay là câu hook.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Target</div><div class="ta-row-val">Nam & nữ 32-50, Long Khánh + bán kính 15km, sở thích: nội thất, kiến trúc nhà, xây nhà mới.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Giả thuyết</div><div class="ta-row-val">Câu hỏi đánh vào nỗi sợ "lỗi thời" thay vì nỗi sợ "hỏng" — test xem việc đặt câu hỏi ngược thói quen có giữ chân người xem tốt hơn nội dung mô tả sản phẩm trực tiếp không.</div></div>
+        </div>
+      </div>
+
+      <!-- ANGLE 2 -->
+      <div class="test-angle-card">
+        <div class="ta-head">
+          <div class="ta-num">2</div>
+          <div class="ta-name">Tiếng ồn duy nhất trong xưởng là tiếng giấy nhám</div>
+          <span class="ta-format">Video tĩnh lặng 20-30s</span>
+        </div>
+        <div class="ta-body">
+          <div class="ta-row"><div class="ta-row-label">Chủ đề</div><div class="ta-row-val">Không lời thoại, không nhạc. Cận cảnh tay người thợ chà nhám một góc bàn, lặp đi lặp lại, chậm rãi, trong ánh sáng tự nhiên từ cửa sổ xưởng. Âm thanh duy nhất là tiếng nhám cọ lên gỗ.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Hook 3 giây</div><div class="ta-row-val"><em>(Không lời — mở bằng cận cảnh chuyển động tay chà nhám, âm thanh thật ngay từ giây đầu)</em></div></div>
+          <div class="ta-row"><div class="ta-row-label">Nội dung</div><div class="ta-row-val">Một cú quay tĩnh, không cắt cảnh, kéo dài nhịp chậm rãi của chuyển động lặp lại. Cuối video, một dòng chữ xuất hiện chậm: <em>"Có những việc không thể làm nhanh hơn."</em> Không logo, không CTA giữa video — chỉ xuất hiện cuối cùng.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Target</div><div class="ta-row-val">Mở rộng hơn Angle 1 — thêm sở thích "thiền, chánh niệm, ASMR, thủ công mỹ nghệ" để bắt đúng tệp phản ứng tốt với nhịp độ chậm.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Giả thuyết</div><div class="ta-row-val">Nội dung dạng "ASMR nhẹ" — tĩnh lặng và lặp lại thay vì kể chuyện bằng lời — đang có xu hướng giữ chân người xem tốt trên TikTok/Reels mà không cần kịch bản thoại nào. Test xem sự tỉ mỉ có truyền tải hiệu quả hơn qua im lặng so với qua lời giải thích không.</div></div>
+        </div>
+      </div>
+
+      <!-- ANGLE 3 -->
+      <div class="test-angle-card">
+        <div class="ta-head">
+          <div class="ta-num">3</div>
+          <div class="ta-name">Tua nhanh một năm sống cùng món đồ</div>
+          <span class="ta-format">Video time-lapse 15-20s</span>
+        </div>
+        <div class="ta-body">
+          <div class="ta-row"><div class="ta-row-label">Chủ đề</div><div class="ta-row-val">Một món nội thất giá rẻ "xuống cấp theo tốc độ tua nhanh" trong vài giây — ố màu, cong vênh, ốc lỏng (dựng hiệu ứng hoặc dùng tư liệu thật đã qua thời gian sử dụng), đối lập với cảnh tĩnh, không đổi của sản phẩm Phước Thịnh.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Hook 3 giây</div><div class="ta-row-val"><em>"Đây là một năm trôi qua với 2 chiếc bàn khác nhau."</em></div></div>
+          <div class="ta-row"><div class="ta-row-label">Nội dung</div><div class="ta-row-val">Chia khung hoặc cắt cảnh nhanh: bên xuống cấp tua nhanh có chuyển động rõ rệt (ố, cong, lỏng), bên Phước Thịnh giữ nguyên tĩnh suốt video — tương phản bằng chuyển động chứ không bằng lời. Nhạc nhẹ, không lời thoại.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Target</div><div class="ta-row-val">Tệp đang cân nhắc giữa nhiều lựa chọn — nhắm vào hành vi "đã từng xem nhiều fanpage nội thất khác" (lookalike sơ bộ từ Pixel mới cài).</div></div>
+          <div class="ta-row"><div class="ta-row-label">Giả thuyết</div><div class="ta-row-val">Hài hước nhẹ + trực quan hoá nỗi sợ "xuống cấp" bằng chuyển động dễ chia sẻ hơn nhiều so với so sánh thông số hay câu chuyện kể — test xem định dạng time-lapse đối lập có tạo được engagement cao hơn so sánh tĩnh không.</div></div>
+        </div>
+      </div>
+
+      <!-- ANGLE 4 -->
+      <div class="test-angle-card">
+        <div class="ta-head">
+          <div class="ta-num">4</div>
+          <div class="ta-name">Tại sao người ta sửa nhà lần 2</div>
+          <span class="ta-format">Video text-driven 15-20s</span>
+        </div>
+        <div class="ta-body">
+          <div class="ta-row"><div class="ta-row-label">Chủ đề</div><div class="ta-row-val">Một quan sát thật gây tò mò, dẫn dắt bằng text trước khi nói về Phước Thịnh — để người xem tự nhận ra vấn đề của chính họ trước khi thấy giải pháp.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Hook 3 giây</div><div class="ta-row-val"><em>"Nhiều người sửa nhà lần 2 — không phải vì nhà hỏng, mà vì hối hận chuyện nội thất lần 1."</em></div></div>
+          <div class="ta-row"><div class="ta-row-label">Nội dung</div><div class="ta-row-val">Video chủ yếu là chuyển động text trên nền hình ảnh không gian sống (có thể dùng ảnh cũ hậu kỳ), nhịp chậm để người xem đọc kịp, chỉ xuất hiện sản phẩm/thương hiệu ở 3 giây cuối — giữ đúng tinh thần "vấn đề trước, giải pháp sau".</div></div>
+          <div class="ta-row"><div class="ta-row-label">Target</div><div class="ta-row-val">Thu hẹp hơn — nhắm vào nhóm đang trong giai đoạn xây/sửa nhà lần đầu, thu nhập khá-cao, quan tâm nội dung về nhà cửa, xây dựng.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Giả thuyết</div><div class="ta-row-val">Đặt vấn đề trước khi nói về thương hiệu giúp content không bị cảm giác "quảng cáo" ngay từ đầu — test xem cấu trúc "insight trước, brand sau" có giữ chân người xem tốt hơn nội dung giới thiệu thương hiệu trực tiếp không.</div></div>
+        </div>
+      </div>
+
+      <!-- ANGLE 5 -->
+      <div class="test-angle-card">
+        <div class="ta-head">
+          <div class="ta-num">5</div>
+          <div class="ta-name">Một phút im lặng trong showroom</div>
+          <span class="ta-format">Video quan sát 20-30s</span>
+        </div>
+        <div class="ta-body">
+          <div class="ta-row"><div class="ta-row-label">Chủ đề</div><div class="ta-row-val">Không lời thoại, không nhạc kịch tính — chỉ quay cảnh một khách bước vào showroom, chạm tay lên mặt bàn, dừng lại lâu hơn bình thường. Cảm xúc thật của khoảnh khắc "đây rồi", không dàn dựng quá mức.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Hook 3 giây</div><div class="ta-row-val"><em>(Không lời — mở bằng cảnh bước chân chậm lại khi đến gần sản phẩm)</em></div></div>
+          <div class="ta-row"><div class="ta-row-label">Nội dung</div><div class="ta-row-val">Quay tự nhiên (có thể là khách thật ghé showroom, hoặc dàn dựng tối giản với người quen), giữ nhịp chậm, ánh sáng tự nhiên. Không cần text overlay nhiều — để khoảnh khắc tự kể chuyện.</div></div>
+          <div class="ta-row"><div class="ta-row-label">Target</div><div class="ta-row-val">Tệp rộng nhất trong 5 angle — phụ nữ 30-50, quan tâm trang trí nhà cửa, decor, đang trong giai đoạn tìm cảm hứng (chưa chắc đã sẵn sàng mua).</div></div>
+          <div class="ta-row"><div class="ta-row-label">Giả thuyết</div><div class="ta-row-val">Một khoảnh khắc cảm xúc thật, không kịch bản hoá, thường đáng tin hơn nhiều so với nội dung được dàn dựng kỹ — test xem định dạng "quan sát" này có tạo kết nối cảm xúc tốt hơn các định dạng có lời dẫn dắt không.</div></div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <div class="note-icon">i</div>
+        <div class="note-text"><strong>Sau 14 ngày,</strong> D STUDIO sẽ đọc dữ liệu thực tế của cả 5 angle và xác định 1-2 angle có chỉ số tốt nhất — đây sẽ là angle được nhân rộng thành nhiều biến thể organic ở Tuần 4. Các đợt Test #2, #3, #4 ở những tháng sau sẽ tiếp tục khai thác insight "sợ chọn sai" theo những góc độ khác, điều chỉnh dựa trên kết quả tích lũy qua từng đợt.</div>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">4</div>
+          <div>
+            <div class="week-title">Đọc kết quả Test #1, Nhân rộng Organic & Báo cáo tháng</div>
+            <div class="week-sub">Đóng chu kỳ test đầu tiên</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Báo cáo T1 + Kế hoạch T2</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Phân tích kết quả Đợt Test #1: Hook Hold Rate, CTR, Engagement Rate của từng angle — xác định 1–2 angle thắng bằng dữ liệu cụ thể.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text"><strong>Nhân rộng angle thắng:</strong> sản xuất 3–4 biến thể organic — version dài cho YouTube, cắt ngắn cho TikTok, caption mới khai thác cùng insight.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Hoàn tất video/ảnh nhà máy quay bổ sung từ Tuần 3 — nguyên liệu mới bắt đầu được đưa vào content từ tuần này trở đi.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Tổng hợp báo cáo CPM, reach, phản ứng tệp từ Đợt Test #1 — đo độ phủ đúng tệp, chưa kỳ vọng lead nhiều ở giai đoạn này.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-all">PT + DS</span>
+            <div class="task-text">Họp báo cáo Tháng 1 + trình bày Đợt Test #2 dự kiến cho Tháng 2 — xác nhận angle nào sẽ scale mạnh hơn.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Hoàn thiện content plan chi tiết cho Tháng 2 dựa trên dữ liệu thực tế từ Test #1, không còn dựa trên giả định.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Báo cáo Test #1</span>
+          <span class="deliv-tag">3-4 bài organic nhân rộng</span>
+          <span class="deliv-tag">Tư liệu nhà máy mới</span>
+          <span class="deliv-tag">Content plan T2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THÁNG 2 — KÍCH HOẠT -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="phase-badge">Tháng 2 — Kích hoạt</div>
+      <h2 class="s-title">Nhân rộng những gì đã được chứng minh hiệu quả</h2>
+      <p class="s-desc">Bước vào tháng 2 với nền tảng đã ổn định và ít nhất 1 đợt test đã có dữ liệu. Trọng tâm chuyển sang chạy thêm 2 đợt test mới, tăng tần suất organic, và bắt đầu thăm dò nhẹ thị trường Long Thành — chặng đầu tiên trong lộ trình mở rộng.</p>
+    </div>
+
+    <div class="month-summary">
+      <div class="ms-card"><div class="ms-label">Trọng tâm</div><div class="ms-val">Scale content + Đợt test #2, #3</div></div>
+      <div class="ms-card"><div class="ms-label">Content organic</div><div class="ms-val">10–12 bài/tháng</div></div>
+      <div class="ms-card"><div class="ms-label">Mở rộng</div><div class="ms-val">Thăm dò Long Thành</div></div>
+      <div class="ms-card"><div class="ms-label">Milestone cuối tháng</div><div class="ms-val">2 đợt test hoàn tất + Lead đầu tiên</div></div>
+    </div>
+
+    <!-- WEEK 5 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">5</div>
+          <div>
+            <div class="week-title">Khởi động Đợt Test #2 & Mở rộng nhịp content</div>
+            <div class="week-sub">Tuần đầu Tháng 2</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Đợt Test #2 bắt đầu</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Sản xuất 3–5 content angle mới cho Đợt Test #2 — mở rộng từ angle thắng Test #1, thêm góc mới (lifestyle, xử lý objection giá cao).</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text"><strong>Khởi động Đợt Test #2</strong> — Traffic + Engagement, vẫn target Long Khánh nhưng mở rộng nhẹ độ tuổi/sở thích để tìm thêm tín hiệu.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Tăng nhịp đăng bài lên 10–12 bài/tháng (so với 8/tuần T1) — phối trộn sản phẩm, quy trình, lifestyle, B2B proof.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Sản xuất 2–3 video ngắn 15–30s cho Reels/TikTok dựa trên angle đã thắng ở Test #1.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Đăng nội dung lên kênh YouTube chính theo series đã thiết lập — format cố định, thumbnail nhất quán.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Theo dõi Pixel data tích lũy từ T1 — bắt đầu xây Custom Audience từ traffic website đã có.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Đợt Test #2 đang chạy</span>
+          <span class="deliv-tag">2-3 video ngắn</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 6 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">6</div>
+          <div>
+            <div class="week-title">Vận hành song song content & TikTok content sâu</div>
+            <div class="week-sub">Khai thác kênh TikTok theo benchmark ngành</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: TikTok có nhịp đăng ổn định</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Áp dụng công thức từ benchmark Nội thất Tuấn Phát: behind-the-scenes xưởng gỗ, câu chuyện thợ thủ công cho TikTok @noithatphuocthinhlk.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Quay thêm tư liệu xưởng/showroom bổ sung nếu góc đã thắng Test #1 cần thêm nguyên liệu để mở rộng biến thể.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Tiếp tục 2–3 bài/tuần trên fanpage; song song đăng đều TikTok và YouTube theo lịch đã thiết lập.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Theo dõi giữa kỳ Đợt Test #2 — điều chỉnh ngân sách nếu có angle vượt trội rõ rệt trước khi hết 2 tuần.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Phối hợp D STUDIO xác nhận thông tin sản phẩm chi tiết (loại gỗ, kích thước, nguồn gốc) để bổ sung mô tả website .vn.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Viết bổ sung mô tả sản phẩm trên website .vn dựa trên thông tin từ Phước Thịnh — giải quyết vấn đề "thiếu thông tin" audit đã chỉ ra.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Lịch đăng TikTok/YouTube ổn định</span>
+          <span class="deliv-tag">Mô tả SP website cập nhật</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 7 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">7</div>
+          <div>
+            <div class="week-title">Đọc kết quả Test #2, Khởi động Đợt Test #3</div>
+            <div class="week-sub">Vòng lặp Test-to-Organic thứ hai khép kín</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Đợt Test #3 bắt đầu</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Phân tích kết quả Đợt Test #2 — so sánh với Test #1 để xác định pattern lặp lại (loại content nào liên tục thắng).</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Nhân rộng angle thắng Test #2 thành 3–4 biến thể organic, ưu tiên định dạng video cho TikTok/Reels.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Sản xuất content angle mới cho Đợt Test #3 — bắt đầu thử nghiệm angle hướng đến thị trường Long Thành (chặng kế tiếp).</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text"><strong>Khởi động Đợt Test #3</strong> — vẫn target chính Long Khánh, thêm một campaign nhỏ thăm dò khu vực Long Thành.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Cập nhật bộ template/visual nếu cần điều chỉnh theo phản hồi từ 2 đợt test đầu.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Theo dõi lead/inbox từ Zalo OA và fanpage — phản hồi tư vấn theo kịch bản đã thống nhất với D STUDIO.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Báo cáo Test #2</span>
+          <span class="deliv-tag">Đợt Test #3 đang chạy</span>
+          <span class="deliv-tag">Thăm dò Long Thành</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 8 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">8</div>
+          <div>
+            <div class="week-title">Tổng kết Tháng 2, Đọc Test #3 & Báo cáo</div>
+            <div class="week-sub">Chuẩn bị bước vào Tháng 3 — Tối ưu</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Báo cáo T2 + Kế hoạch T3</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Phân tích kết quả Đợt Test #3, bao gồm cả tín hiệu thăm dò từ Long Thành — đánh giá có nên mở rộng campaign sang khu vực này trong Tháng 3.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Nhân rộng angle thắng Test #3 thành nội dung organic, ưu tiên các angle có pattern lặp lại qua nhiều đợt test.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Tổng hợp báo cáo Tháng 2: Reach, CPM, Engagement, Lead đầu tiên (nếu có), Cost per Lead sơ bộ.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-all">PT + DS</span>
+            <div class="task-text">Họp báo cáo Tháng 2 — xác nhận ngân hàng content angle đã được kiểm chứng qua 3 đợt test, sẵn sàng cho giai đoạn tối ưu Tháng 3.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Tổng hợp toàn bộ angle thắng qua 3 đợt test thành "thư viện content đã kiểm chứng" — tài sản dùng lâu dài cho Phước Thịnh.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Lên kế hoạch Tháng 3: chuyển trọng tâm ads từ test sang retargeting + A/B test sâu hơn trên angle đã thắng.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Báo cáo Test #3</span>
+          <span class="deliv-tag">Thư viện content đã kiểm chứng</span>
+          <span class="deliv-tag">Kế hoạch T3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THÁNG 3 — TỐI ƯU -->
+<div class="sb">
+  <div class="page">
+    <div class="sh">
+      <div class="phase-badge">Tháng 3 — Tối ưu</div>
+      <h2 class="s-title">Retargeting, A/B test sâu & Chuẩn bị scale tiếp</h2>
+      <p class="s-desc">Với ngân hàng content angle đã kiểm chứng qua 3 đợt test, Tháng 3 tập trung khai thác sâu thay vì test mới hoàn toàn: retarget người đã tương tác, A/B test biến thể của angle thắng, và đánh giá điều kiện để mở rộng chính thức sang Long Thành.</p>
+    </div>
+
+    <div class="month-summary">
+      <div class="ms-card"><div class="ms-label">Trọng tâm</div><div class="ms-val">Retargeting + A/B test sâu</div></div>
+      <div class="ms-card"><div class="ms-label">Content organic</div><div class="ms-val">10–12 bài/tháng</div></div>
+      <div class="ms-card"><div class="ms-label">Đánh giá mở rộng</div><div class="ms-val">Điều kiện vào Long Thành</div></div>
+      <div class="ms-card"><div class="ms-label">Milestone cuối tháng</div><div class="ms-val">Tổng kết quý + Đề xuất Q2</div></div>
+    </div>
+
+    <!-- WEEK 9 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">9</div>
+          <div>
+            <div class="week-title">Khởi động Retargeting & Đợt Test #4</div>
+            <div class="week-sub">Chuyển trọng tâm ads từ khám phá sang khai thác</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Retargeting campaign live</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Khởi động campaign retargeting nhắm vào Custom Audience đã tích lũy từ Pixel (người từng xem video, click website) trong 2 tháng đầu.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Sản xuất angle mới cho Đợt Test #4 — lần này tập trung A/B test biến thể (hook khác, CTA khác) của angle đã thắng, không thử angle hoàn toàn mới.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text"><strong>Khởi động Đợt Test #4</strong> — A/B test sâu trên 2-3 biến thể của angle mạnh nhất đã xác định.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Duy trì 10–12 bài/tháng trên fanpage, TikTok, YouTube — phối trộn nội dung từ thư viện đã kiểm chứng với nội dung thời sự (dự án mới hoàn thành, feedback khách hàng).</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Nếu có dự án/sản phẩm mới hoàn thành trong tháng, quay/chụp bổ sung để làm mới thư viện content.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Cung cấp feedback khách hàng thực tế (nếu có) để D STUDIO khai thác thành content testimonial — social proof mạnh cho tệp cao cấp.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Retargeting live</span>
+          <span class="deliv-tag">Đợt Test #4 đang chạy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 10 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">10</div>
+          <div>
+            <div class="week-title">Đánh giá điều kiện mở rộng Long Thành</div>
+            <div class="week-sub">Dựa trên tín hiệu thăm dò từ Tháng 2</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Quyết định scope Long Thành</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Phân tích dữ liệu thăm dò Long Thành từ Tháng 2 — so sánh CPM, engagement rate với Long Khánh để đánh giá độ sẵn sàng của thị trường.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-all">PT + DS</span>
+            <div class="task-text">Họp quyết định: mở rộng chính thức campaign sang Long Thành ngay trong Tháng 3, hay giữ thăm dò thêm và chính thức hoá vào Q2.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Nếu quyết định mở rộng: điều chỉnh 1–2 content angle có yếu tố địa lý phù hợp hơn cho Long Thành (gần khu công nghiệp, dân cư mới).</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Theo dõi giữa kỳ retargeting + Test #4 — điều chỉnh ngân sách theo hiệu suất thực tế.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Tiếp tục nhịp đăng bài đều trên cả 3 kênh, ưu tiên nội dung xử lý objection giá cao — đã đến giai đoạn khách hàng cần thông tin sâu hơn để ra quyết định.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Tổng hợp toàn bộ visual asset đã sản xuất 3 tháng thành bộ thư viện có tổ chức, dễ tái sử dụng cho Q2.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Quyết định scope Long Thành</span>
+          <span class="deliv-tag">Thư viện visual asset</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 11 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">11</div>
+          <div>
+            <div class="week-title">Tối ưu cuối kỳ & Đọc kết quả Test #4</div>
+            <div class="week-sub">Chuẩn bị dữ liệu cho tổng kết quý</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Test #4 hoàn tất</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Phân tích kết quả Đợt Test #4 — xác nhận biến thể nào của angle mạnh nhất hiệu quả hơn để dùng làm chuẩn cho Q2.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Tổng hợp Cost per Lead theo từng angle/campaign suốt quý — xác định angle nào không chỉ có engagement cao mà còn ra lead chất lượng.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Nhân rộng biến thể thắng Test #4 thành nội dung organic cuối cùng của quý.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Tổng hợp số liệu thực tế từ showroom (lượt khách ghé, hỏi mua) để đối chiếu với dữ liệu digital — đánh giá đầy đủ hiệu quả 3 tháng.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Duy trì lịch đăng bài, không gián đoạn trong lúc chuẩn bị báo cáo tổng kết.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-design">Design</span>
+            <div class="task-text">Chuẩn bị visual cho báo cáo tổng kết quý — trình bày trực quan kết quả 4 đợt test và growth của các kênh.</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Báo cáo Test #4</span>
+          <span class="deliv-tag">Cost per Lead theo angle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 12 -->
+    <div class="week-card">
+      <div class="week-head">
+        <div class="week-num">
+          <div class="week-num-badge">12</div>
+          <div>
+            <div class="week-title">Tổng kết Quý 1 & Đề xuất Quý 2</div>
+            <div class="week-sub">Tuần cuối — đóng vòng lặp chiến lược</div>
+          </div>
+        </div>
+        <span class="week-milestone">Milestone: Báo cáo tổng kết 3 tháng</span>
+      </div>
+      <div class="week-body">
+        <div class="task-grid">
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Hoàn thiện báo cáo tổng kết quý: growth từng kênh (Facebook, TikTok, YouTube), tổng hợp 4 đợt test, Cost per Lead cuối cùng, ROI ước tính.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Bàn giao thư viện content đã kiểm chứng hoàn chỉnh — angle nào hiệu quả nhất, vì sao, và cách tái sử dụng cho giai đoạn tiếp theo.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-all">PT + DS</span>
+            <div class="task-text">Họp tổng kết Quý 1 — đối chiếu kết quả với mục tiêu ban đầu trong proposal, thảo luận đề xuất Quý 2.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-ads">Ads</span>
+            <div class="task-text">Đề xuất Quý 2: tăng ngân sách ads dựa trên angle đã được kiểm chứng vững chắc, mở rộng chính thức sang Long Thành/Xuân Lộc theo lộ trình đã thống nhất.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-content">Content</span>
+            <div class="task-text">Đề xuất điều chỉnh tỷ lệ ads/organic cho Quý 2 dựa trên hiệu suất thực tế — có thể tiếp tục giảm ads nếu organic đã đủ mạnh, hoặc tăng ads nếu cần tốc độ lead nhanh hơn.</div>
+          </div>
+          <div class="task-item">
+            <span class="task-role role-pt">PT</span>
+            <div class="task-text">Xác nhận tiếp tục hợp tác Quý 2 và điều chỉnh hợp đồng/thanh toán theo thoả thuận mới (nếu có thay đổi scope).</div>
+          </div>
+        </div>
+        <div class="deliv-strip">
+          <span class="deliv-label">Bàn giao:</span>
+          <span class="deliv-tag">Báo cáo tổng kết 3 tháng</span>
+          <span class="deliv-tag">Đề xuất Q2</span>
+          <span class="deliv-tag">Thư viện content hoàn chỉnh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI THEO THÁNG -->
+<div class="sw">
+  <div class="page">
+    <div class="sh">
+      <div class="sn-label">Tổng hợp — KPI theo tháng</div>
+      <h2 class="s-title">Cách đo lường thành công ở từng giai đoạn</h2>
+      <p class="s-desc">Mỗi tháng có một định nghĩa "thành công" khác nhau — phù hợp với chu kỳ quyết định mua 2–8 tuần của ngành nội thất cao cấp.</p>
+    </div>
+
+    <table class="kpi-table">
+      <thead>
+        <tr>
+          <th style="width:140px;">Giai đoạn</th>
+          <th>KPI chính</th>
+          <th>Không kỳ vọng</th>
+          <th style="width:200px;">Cơ chế Test-to-Organic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tháng 1<br>Nền tảng</strong></td>
+          <td>Website hết lỗi ảnh, fanpage định vị đúng, độ phủ đúng tệp từ Đợt Test #1, engagement rate cải thiện so với baseline (94 likes).</td>
+          <td>Lead số lượng lớn — brand foundation chưa đủ vững để chuyển đổi mạnh.</td>
+          <td>1 đợt test hoàn tất, xác định 1-2 angle thắng đầu tiên.</td>
+        </tr>
+        <tr>
+          <td><strong>Tháng 2<br>Kích hoạt</strong></td>
+          <td>Lead đầu tiên xuất hiện (chưa cần nhiều), nhịp content ổn định 10-12 bài/tháng trên 3 kênh, tín hiệu rõ ràng từ thăm dò Long Thành.</td>
+          <td>Cost per Lead tối ưu — vẫn đang trong giai đoạn xác nhận pattern.</td>
+          <td>2 đợt test (Test #2, #3), ngân hàng content angle bắt đầu hình thành.</td>
+        </tr>
+        <tr>
+          <td><strong>Tháng 3<br>Tối ưu</strong></td>
+          <td>Cost per Lead có xu hướng giảm nhờ retargeting + angle đã kiểm chứng, lead chất lượng (đúng tệp) tăng so với Tháng 2.</td>
+          <td>Mở rộng quy mô lớn — đó là việc của Quý 2 sau khi đã có nền tảng vững.</td>
+          <td>1 đợt A/B test sâu (Test #4) + retargeting song song.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <img src="data:image/png;base64,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" alt="D STUDIO">
+  <div class="doc-footer-text">
+    <strong>Audit & Kế hoạch triển khai 3 tháng — Nội thất Phước Thịnh</strong><br>
+    Tài liệu chiến lược D STUDIO · 30/06/2026<br>
+    dstudioagency.contact@gmail.com · 0879.576.669
+  </div>
+</div>
+
+</body>
+</html>
